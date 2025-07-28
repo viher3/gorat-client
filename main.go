@@ -7,10 +7,19 @@ import (
 )
 
 func main() {
-	ip, err := network.GetPrivateIP()
-	if err != nil {
-		fmt.Println("Error al obtener IP privada:", err)
+	privateIp, privateIpErr := network.GetPrivateIP()
+	publicIp, publicIpErr := network.GetPublicIP()
+
+	if privateIpErr != nil {
+		fmt.Println("Error getting Private IP:", privateIpErr)
 		return
 	}
-	fmt.Println("IP privada actual:", ip)
+
+	if publicIpErr != nil {
+		fmt.Println("Error getting Public IP:", publicIpErr)
+		return
+	}
+
+	fmt.Println("Private IP:", privateIp)
+	fmt.Println("Public IP:", publicIp)
 }

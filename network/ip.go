@@ -1,10 +1,19 @@
 package network
 
 import (
+	"fmt"
+	"io"
 	"net"
+	"net/http"
+	"time"
 )
 
-// GetPrivateIP - Get first private IP found in network interfaces
+var publicIPServices = []string{
+	"https://api.ipify.org",
+	"https://ifconfig.me/ip",
+	"https://ipinfo.io/ip",
+}
+
 func GetPrivateIP() (string, error) {
 	interfaces, err := net.Interfaces()
 	if err != nil {
@@ -36,7 +45,27 @@ func GetPrivateIP() (string, error) {
 	return "", nil
 }
 
-// isPrivateIP checks if it is a private IP
+func GetPublicIP() (string, error) {
+	client := http.Client{Timeout: 30 * time.Second}
+
+	for _, url := range publicIPServices {
+		resp, err := client.Get(url)
+		if err != nil {
+			continue // try next service
+		}
+		defer resp.Body.Close()
+
+		ip, err := io.ReadAll(resp.Body)
+		if err != nil {
+			continue // try next service
+		}
+		if resp.StatusCode == http.StatusOK && len(ip) > 0 {
+			return string(ip), nil
+		}
+	}
+	return "", fmt.Errorf("Can't get public IP from external services")
+}
+
 func isPrivateIP(ip net.IP) bool {
 	// 10.0.0.0/8
 	if ip[0] == 10 {
