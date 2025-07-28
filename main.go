@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/viher3/gorat/network"
+	"github.com/viher3/gorat-client/network"
 )
 
 func main() {
