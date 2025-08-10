@@ -1,8 +1,18 @@
 package config
 
-const (
-	CcServerAddress             = "192.168.1.0:1234"
-	DefaultTimeoutInSeconds     = 30
-	WaitTimeUntilRetryInSeconds = 60 * 60 * 5 // 5 minutes
-	Version                     = "0.0.1"
-)
+type Config struct {
+	CcServerAddress             string
+	DefaultTimeoutInSeconds     int
+	WaitTimeUntilRetryInSeconds int
+	Version                     string
+}
+
+// NewConfig devuelve una instancia con los valores por defecto.
+func NewConfig() *Config {
+	return &Config{
+		CcServerAddress:             "192.168.1.0:1234",
+		DefaultTimeoutInSeconds:     30,
+		WaitTimeUntilRetryInSeconds: 60 * 60 * 5,
+		Version:                     "0.0.1",
+	}
+}
