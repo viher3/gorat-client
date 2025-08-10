@@ -2,14 +2,12 @@ package network
 
 import (
 	"fmt"
-
-	"github.com/viher3/gorat-client/network"
 )
 
 func Execute() {
 
-	privateIp, privateIpErr := network.GetPrivateIP()
-	publicIp, publicIpErr := network.GetPublicIP()
+	privateIp, privateIpErr := GetPrivateIP()
+	publicIp, publicIpErr := GetPublicIP()
 
 	if privateIpErr != nil {
 		fmt.Println("Error getting Private IP:", privateIpErr)
