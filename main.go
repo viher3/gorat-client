@@ -3,10 +3,15 @@ package main
 import (
 	"fmt"
 
+	"github.com/viher3/gorat-client/config"
 	"github.com/viher3/gorat-client/system"
 )
 
 func main() {
+	fmt.Println("############################")
+	fmt.Println("### goRat client v", config.Version, "###")
+	fmt.Println("############################")
+
 	systemInfo := system.GetFullInfo()
 	if systemInfo == nil {
 		fmt.Println("Failed to retrieve system information.")
