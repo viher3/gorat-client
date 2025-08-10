@@ -81,3 +81,13 @@ func isPrivateIP(ip net.IP) bool {
 	}
 	return false
 }
+
+func GetNetworkInfo() map[string]string {
+	privateIP, _ := GetPrivateIP()
+	publicIP, _ := GetPublicIP()
+
+	info := make(map[string]string)
+	info["privateIP"] = privateIP
+	info["publicIp"] = publicIP
+	return info
+}
