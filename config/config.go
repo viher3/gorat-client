@@ -7,7 +7,6 @@ type Config struct {
 	Version                     string
 }
 
-// NewConfig devuelve una instancia con los valores por defecto.
 func NewConfig() *Config {
 	return &Config{
 		CcServerAddress:             "192.168.1.0:1234",
