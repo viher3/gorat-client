@@ -10,7 +10,7 @@ import (
 func main() {
 	conf := config.NewConfig()
 	fmt.Println("############################")
-	fmt.Println("### goRat client v", conf.Version, "###")
+	fmt.Println("### goRat client v"+conf.Version, "###")
 	fmt.Println("############################")
 
 	systemInfo := system.GetFullInfo()
