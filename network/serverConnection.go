@@ -21,7 +21,10 @@ func ConnectToServer(cnf *config.Config) {
 		fmt.Println("Connection success.")
 
 		// TODO: send initial message with system info for client registration in the server
-		err = websocket.SendMessage(conn, "Hello Server!")
+		err = websocket.SendMessage(conn, *websocket.NewWsMessage("client_registration", map[string]interface{}{
+			"client_id":   "mylaptop",
+			"client_name": "mylaptop Client",
+		}))
 		if err != nil {
 			fmt.Println("Error sending message:", err)
 			return

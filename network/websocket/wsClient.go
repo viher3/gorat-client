@@ -1,6 +1,8 @@
 package websocket
 
 import (
+	"encoding/json"
+
 	"github.com/gorilla/websocket"
 	"github.com/viher3/gorat-client/config"
 )
@@ -14,8 +16,13 @@ func Connect(cnf *config.Config) (*websocket.Conn, error) {
 	return conn, nil
 }
 
-func SendMessage(conn *websocket.Conn, message string) error {
-	return conn.WriteMessage(websocket.TextMessage, []byte(message))
+func SendMessage(conn *websocket.Conn, message WsMessage) error {
+	data, err := json.Marshal(message)
+	if err != nil {
+		return err
+	}
+
+	return conn.WriteMessage(websocket.TextMessage, data)
 }
 
 func ReceiveMessage(conn *websocket.Conn) (string, error) {
