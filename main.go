@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"time"
 
 	"github.com/viher3/gorat-client/config"
 	"github.com/viher3/gorat-client/network/socket"
@@ -21,5 +22,11 @@ func main() {
 	}
 
 	socket.SendMessage(conn, "Hello world!")
-	socket.CloseConnection(conn)
+	//socket.CloseConnection(conn)
+
+	for {
+		timeToWait := 10
+		fmt.Println("Waiting " + fmt.Sprint(timeToWait) + " seconds before cheking incomming messages ...")
+		time.Sleep(time.Duration(timeToWait) * time.Second)
+	}
 }
