@@ -2,7 +2,6 @@ package socket
 
 import (
 	"fmt"
-	"log"
 	"net"
 
 	"github.com/viher3/gorat-client/config"
@@ -13,7 +12,8 @@ func ConnectToServer(cnf *config.Config) (net.Conn, error) {
 
 	conn, err := net.Dial("tcp", cnf.ServerAddress)
 	if err != nil {
-		log.Fatal(err)
+		fmt.Println("Error connecting to the server:", err)
+		return nil, err
 	}
 
 	fmt.Println("Connection success.")

@@ -5,11 +5,12 @@ import (
 )
 
 type Config struct {
-	ServerAddress               string
-	ServerConnectionMode        string
-	TimeoutInSeconds            int
-	WaitTimeUntilRetryInSeconds int
-	Version                     string
+	ServerAddress                               string
+	ServerConnectionMode                        string
+	TimeoutInSeconds                            int
+	WaitTimeUntilServerConnectionRetryInSeconds int
+	WaitTimeUntilMessageReadRetryInSeconds      int
+	Version                                     string
 }
 
 const AppVersion = "0.0.1"
@@ -27,10 +28,11 @@ func NewConfig() *Config {
 	fullServerAddress := *serverAddress + ":" + *port
 
 	return &Config{
-		ServerAddress:               fullServerAddress,
-		ServerConnectionMode:        *serverConnectionMode,
-		TimeoutInSeconds:            DefaultTimeoutInSeconds,
-		WaitTimeUntilRetryInSeconds: 60 * 60 * DefaulWaitTimeUntilRetryInMinutes,
-		Version:                     AppVersion,
+		ServerAddress:        fullServerAddress,
+		ServerConnectionMode: *serverConnectionMode,
+		TimeoutInSeconds:     DefaultTimeoutInSeconds,
+		WaitTimeUntilServerConnectionRetryInSeconds: 60 * DefaulWaitTimeUntilServerConnectionRetryInMinutes,
+		WaitTimeUntilMessageReadRetryInSeconds:      60 * DefaultWaitTimeUntilMessageReadRetryInMinutes,
+		Version:                                     AppVersion,
 	}
 }
