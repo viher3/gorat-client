@@ -25,8 +25,11 @@ func main() {
 			continue
 		}
 
+		// dispatch ping message to server
+		// TODO: move to server_command
 		fmt.Println("Connected to server!")
-		socket.SendMessage(conn, "h1\n")
+		clientId := "someid" + time.Now().Format("20060102150405")
+		socket.SendMessage(conn, "{\"action\": \"ping\", \"payload\": {\"client_id\": \""+clientId+"\"}}\n")
 
 		for {
 			_, err := socket.ReceiveMessage(conn)
