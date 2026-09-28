@@ -26,7 +26,7 @@ func main() {
 		}
 
 		fmt.Println("Connected to server!")
-		socket.SendMessage(conn, "Hello world!")
+		socket.SendMessage(conn, "h1\n")
 
 		for {
 			_, err := socket.ReceiveMessage(conn)

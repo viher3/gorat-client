@@ -23,7 +23,7 @@ func ConnectToServer(cnf *config.Config) (net.Conn, error) {
 
 func SendMessage(conn net.Conn, message string) error {
 	fmt.Println("Sending message: " + message)
-	_, err := conn.Write([]byte(message + "\n"))
+	_, err := conn.Write([]byte(message))
 
 	if err != nil {
 		fmt.Println("Error sending message:", err)
